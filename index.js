@@ -10,7 +10,6 @@ app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_TOKEN; // get private app access token from .env file not committed in github
-const BASE_URL = 'https://api.hubspot.com/';
 const CUSTOM_OBJECT_ID = '2-42396586' // homes object type
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
@@ -18,15 +17,22 @@ const CUSTOM_OBJECT_ID = '2-42396586' // homes object type
 // * Code for Route 1 goes here
 // Homepage Route - GET request
 app.get('/', async (req, res) => {
-    // get all homes
-    const homesURL = `https://api.hubspot.com/crm/v3/objects/${CUSTOM_OBJECT_ID}`;
+    // get all homes using search endpoint
+    const homesURL = `https://api.hubspot.com/crm/v3/objects/${CUSTOM_OBJECT_ID}/search`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     }
+    
+    const searchBody = {
+        properties: ['hs_object_id', 'name', 'state', 'short_description'],
+        limit: 100
+    };
+    
     try {
-        const resp = await axios.get(homesURL, { headers });
+        const resp = await axios.post(homesURL, searchBody, { headers });
         const data = resp.data.results;
+        console.log('API Response:', data); // Debug log
         res.render('homepage', { title: 'Homepage | Integrating With HubSpot I Practicum - Kyle Barkins', data });
     } catch (error) {
         console.error('Error details:', error.response?.data || error.message);

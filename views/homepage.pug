@@ -13,12 +13,16 @@ html
             table
                 thead
                     tr
-                        each property in Object.keys(data[0].properties)
-                            th= property
+                        th ID
+                        th Name
+                        th State
+                        th Description
                 tbody
                     each home in data
                         tr
-                            each property in Object.keys(home.properties)
-                                td= home.properties[property]
+                            td= home.properties.hs_object_id
+                            td= home.properties.name
+                            td= home.properties.state
+                            td= home.properties.short_description
         else
             p No homes found 
