@@ -5,6 +5,34 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-          h1= title
-            p
-                a(href="/") Return to the homepage
+        h1= title
+        p
+            a(href="/") Return to the homepage
+
+        .form-wrapper
+            h2 Create New Home
+            form(action="/update-cobj" method="POST" enctype="application/x-www-form-urlencoded")
+                .form-group
+                    label(for="name") Name:
+                    input#name(type="text" name="name" required)
+                
+                .form-group
+                    label(for="street_address") Street Address:
+                    input#street_address(type="text" name="street_address" required)
+                
+                .form-group
+                    label(for="state") State:
+                    input#state(type="text" name="state" required)
+                
+                .form-group
+                    label(for="short_description") Description:
+                    textarea#short_description(name="short_description" required)
+                
+                .button-group
+                    button(type="submit") Create New Home
+                    a.button(href="/") Cancel
+
+        script.
+            document.querySelector('form').addEventListener('submit', function(e) {
+                console.log('Form submitted');
+            });
