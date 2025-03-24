@@ -1,0 +1,30 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1= title
+        p
+            a(href="/update-cobj") Add to this table
+
+        if data && data.length > 0
+            table
+                thead
+                    tr
+                        th ID
+                        th Name
+                        th Street Address
+                        th State
+                        th Description
+                tbody
+                    each home in data
+                        tr
+                            td= home.properties.hs_object_id
+                            td= home.properties.name
+                            td= home.properties.street_address
+                            td= home.properties.state
+                            td= home.properties.short_description
+        else
+            p No homes found 
