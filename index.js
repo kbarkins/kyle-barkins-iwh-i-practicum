@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.get(homesURL, { headers });
         const data = resp.data.results;
-        res.render('homepage', { title: 'Homepage | HubSpot APIs', data });
+        res.render('homepage', { title: 'Homepage | Integrating With HubSpot I Practicum - Kyle Barkins', data });
     } catch (error) {
         console.error('Error details:', error.response?.data || error.message);
         res.status(500).send('Error fetching homes');
