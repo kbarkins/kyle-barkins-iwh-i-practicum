@@ -5,16 +5,16 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-          h1= title
-            p Welcome to #{title}
+        h1= title
+        p Welcome to #{title}
 
-    if data && data.length > 0
-    .homes-list
-      each home in data
-        .home-item
-          h2= home.properties.name
-          p= home.properties.short_description
-          p State: #{home.properties.state}
+        if data && data.length > 0
+            .homes-list
+                each home in data
+                    .home-item
+                        h2= home.properties.name
+                        p= home.properties.short_description
+                        p State: #{home.properties.state}
         else
             p No homes found
 

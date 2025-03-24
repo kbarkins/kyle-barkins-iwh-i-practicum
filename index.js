@@ -24,13 +24,10 @@ app.get('/', async (req, res) => {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     }
-    const params = {
-        properties: ['name', 'short_description', 'state']
-    };
     try {
-        const resp = await axios.get(homesURL, { headers, params });
+        const resp = await axios.get(homesURL, { headers });
         const data = resp.data.results;
-        res.render('index', { title: 'Homepage | HubSpot APIs', data });
+        res.render('homepage', { title: 'Homepage | HubSpot APIs', data });
     } catch (error) {
         console.error('Error details:', error.response?.data || error.message);
         res.status(500).send('Error fetching homes');
